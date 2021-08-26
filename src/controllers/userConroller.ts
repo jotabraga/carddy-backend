@@ -3,7 +3,6 @@ import {signInData, signUpData} from "../schemas/userSchemas";
 import { UserInterface, UserRegisterData } from "../interfaces/UserInterfaces";
 import * as userService from "../services/userService";
 
-
 export async function signUp(req: Request, res: Response){
     const signUpError = signUpData.validate(req.body).error;
     if(signUpError) return res.sendStatus(400);
@@ -15,7 +14,6 @@ export async function signUp(req: Request, res: Response){
     if(!createdUser) return res.sendStatus(409);
     res.sendStatus(201);
 }
-
 
 export async function signIn(req: Request, res: Response){
 
