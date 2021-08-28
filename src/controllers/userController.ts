@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import {signInData, signUpData} from "../schemas/userSchemas";
-import { UserInterface, UserRegisterData } from "../interfaces/UserInterfaces";
+import { UserInterface } from "../interfaces/UserInterfaces";
 import * as userService from "../services/userService";
 
 export async function signUp(req: Request, res: Response){
