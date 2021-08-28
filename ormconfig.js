@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-const sslConfig = process.env.NODE_ENV !== 'production' ? {} : sslData;
 const sslData = {
   ssl: true,
   extra: {
@@ -9,6 +8,7 @@ const sslData = {
     }
   }
 }
+const sslConfig = process.env.NODE_ENV !== 'production' ? {} : sslData;
 
 module.exports = {
     type: "postgres",
