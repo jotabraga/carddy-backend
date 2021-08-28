@@ -6,6 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=test npx jest --rootDir=tests -i",
     "build": "NODE_ENV=production npx tsc --outDir dist && npx typeorm migration:run",
+    "build-test": "npx tsc --outDir dist && npx typeorm migration:run",
     "start": "NODE_ENV=production NODE_TLS_REJECT_UNAUTHORIZED=0 node dist/server.js",
     "dev": "NODE_ENV=development npx nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/server.ts\"",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"

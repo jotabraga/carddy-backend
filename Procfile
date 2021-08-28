@@ -1,0 +1,1 @@
+release: npx typeorm migration:run
