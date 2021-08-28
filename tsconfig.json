@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "noImplicitAny": true,
+    "outDir": "./dist",
+    "strict": true,
+    "importHelpers": true,
+    "removeComments": true,
     "esModuleInterop": true,
+    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "target": "ES5"
   },
-  "exclude": [
-    "node_modules",
-    "tests"
-  ]
+  "include": ["src/*"]
 }

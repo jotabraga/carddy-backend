@@ -1,5 +1,8 @@
 import dotenv from 'dotenv';
 
-const path = process.env.NODE_ENV === "test" ? ".env.test" : ".env";
+const { NODE_ENV } = process.env;
 
-dotenv.config({ path });
+const envPath: string =
+  NODE_ENV === "test" ? "local.test.env" : "local.dev.env";
+
+dotenv.config({ path: envPath });
