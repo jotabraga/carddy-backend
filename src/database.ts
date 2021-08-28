@@ -1,4 +1,4 @@
-import { getConnectionManager } from "typeorm";
+import { getConnectionManager } from 'typeorm';
 
 export default async function connect() {
     const connectionManager = await getConnectionManager();
@@ -9,7 +9,9 @@ export default async function connect() {
         entities: [`${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/entities/*.*`],
         synchronize: true,
         extra: {
-            ssl: true
+            ssl: {
+                rejectUnauthorized: false
+            }
         }
     });
     await connection.connect();
