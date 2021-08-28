@@ -1,13 +1,21 @@
-require('dotenv').config();
+import "./src/setup";
+
 
 module.exports = {
   type: "postgres",
   url: process.env.DATABASE_URL,
   migrationsTableName: "migrations",
-  entities: ["dist/entities/*.js"],
-  migrations: ["dist/migrations/*.js"],
+  entities: ["src/entities/*.ts"],
+  migrations: ["src/migrations/*.ts"],
   cli: {
     migrationsDir: "src/migrations",
-    entitiesDir: "dist/entities/*.js"
-  }
+    entitiesDir: "src/entities/*.ts",
+  },
+  ssl: true,
+  extra: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  },
+  migrationsTransactionMode: "each",
 };
