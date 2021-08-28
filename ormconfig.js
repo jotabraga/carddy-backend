@@ -10,11 +10,5 @@ module.exports = {
         migrationsDir: "src/migrations",
         entitiesDir: "dist/entities/*.js"
     },
-    ssl: true,
-    extra: {
-      ssl: {
-        rejectUnauthorized: false,
-      }
-    },
     migrationsTransactionMode: 'each'
   };
