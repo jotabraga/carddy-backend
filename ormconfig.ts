@@ -1,6 +1,6 @@
-require('dotenv').config();
+import "./src/setup";
 
-module.exports = {
+export = {
   type: "postgres",
   url: process.env.DATABASE_URL,
   migrationsTableName: "migrations",
