@@ -3,6 +3,3 @@ export interface UserInterface {
     password: string;
 }
 
-export interface UserRegisterData extends UserInterface {
-    confirmPassword: string;
-}

@@ -1,11 +1,11 @@
 import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
 import { getRepository } from "typeorm";
-import { UserInterface, UserRegisterData } from "../interfaces/UserInterfaces";
+import { UserInterface } from "../interfaces/UserInterfaces";
 import User from "../entities/User";
 import Session from "../entities/Session";
 
-export async function registerUser({email, password, confirmPassword}: UserRegisterData){
+export async function registerUser({email, password}: UserInterface){
   
   const alreadyExists = await getRepository(User).findOne({ email });
   if(alreadyExists) return false; 
