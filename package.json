@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test npx jest -i",
-    "build": "NODE_ENV=production npx tsc",
-    "build-windows": "npx tsc",
-    "start": "NODE_ENV=production npm run typeorm migration:run && NODE_TLS_REJECT_UNAUTHORIZED=0 node dist/server.js",
-    "typeorm": "ts-node ./node_modules/typeorm/cli",
-    "dev": "NODE_ENV=development npx nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/server.ts\""
+    "test": "NODE_ENV=test npx jest --rootDir=tests -i",
+    "build": "NODE_ENV=production npx tsc --outDir dist && npx typeorm migration:run",
+    "build-test": "npx tsc --outDir dist && npx typeorm migration:run",
+    "start": "NODE_ENV=production NODE_TLS_REJECT_UNAUTHORIZED=0 node dist/server.js",
+    "dev": "NODE_ENV=development npx nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node src/server.ts\"",
+    "typeorm": "ts-node ./node_modules/typeorm/cli"
   },
   "keywords": [],
   "author": "",
