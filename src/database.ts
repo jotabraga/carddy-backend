@@ -4,14 +4,23 @@ if (process.env.NODE_ENV === 'production' && process.env.DATABASE_URL.indexOf("s
   process.env.DATABASE_URL += "?sslmode=require";
 }
 
-export default async function connect () {
+export default async function connect() {
   const connectionManager = await getConnectionManager();
   const connection = connectionManager.create({
-    name: "default",
-    type: "postgres",
-    url: process.env.DATABASE_URL,
-    entities: [`${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/entities/*.*`],
-    ssl: process.env.NODE_ENV === 'production'
+      name: "default",
+      type: "postgres",
+      url: process.env.DATABASE_URL,
+      entities: [
+          `${
+              process.env.NODE_ENV === "production" ? "dist" : "src"
+          }/entities/*.*`,
+      ],
+      extra: {
+          ssl:
+              process.env.NODE_ENV === "production"
+                  ? { rejectUnauthorized: false }
+                  : false,
+      },
   });
   await connection.connect();
   return connection;
