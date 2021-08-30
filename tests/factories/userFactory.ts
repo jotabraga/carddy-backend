@@ -1,14 +1,16 @@
 import { getRepository } from "typeorm";
+import bcrypt from 'bcrypt';
 
 import User from "../../src/entities/User";
 
 export async function createUser () {
-  const user = await getRepository(User).create({
+  const user = getRepository(User).create({
     email: "email@email.com",
     password: "123456"
   });
+  const hashPassword = bcrypt.hashSync(user.password, 12);
 
-  await getRepository(User).save(user);
+  const saved = await getRepository(User).save({...user, password: hashPassword});
 
-  return user;
+  return {...user, id: saved.id};
 }

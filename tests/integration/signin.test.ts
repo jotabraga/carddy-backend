@@ -17,29 +17,30 @@ afterAll(async () => {
   await getConnection().close();
 });
 
-describe("POST /sign-up", () => {
-  it("should answer with status 201 for valid new user", async () => {
+describe("POST /sign-in", () => {
+  it("should answer with status 200 for valid user", async () => {
     const user = await createUser();
+    delete user.id;
 
-    const response = await supertest(app).post("/sign-up").send(user);
+    const response = await supertest(app).post("/sign-in").send(user);
 
-    expect(response.status).toBe(201);
+    expect(response.status).toBe(200);
   });
 
   it("should answer with status 400 for invalid email or password", async () => {
     const user = {};
-
-    const response = await supertest(app).post("/sign-up").send(user);
+    const response = await supertest(app).post("/sign-in").send(user);
 
     expect(response.status).toBe(400);
   });
 
-  it("should answer with status 409 for existing user", async () => {
-    const user = await createUser();
+  it("should answer with status 401 for inexisting user", async () => {
+    const user = {
+      email: "email@email.com",
+      password: "123456"
+    };
+    const response = await supertest(app).post("/sign-in").send(user);
 
-    await supertest(app).post("/sign-up").send(user);
-    const response = await supertest(app).post("/sign-up").send(user);
-
-    expect(response.status).toBe(409);
+    expect(response.status).toBe(401);
   });
 });
