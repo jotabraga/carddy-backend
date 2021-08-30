@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const sslData = {
-  ssl: true,
   extra: {
     ssl: {
       rejectUnauthorized: false,
