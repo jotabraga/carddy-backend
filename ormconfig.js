@@ -1,5 +1,14 @@
 require('dotenv').config();
 
+const sslData = {
+  extra: {
+    ssl: {
+      rejectUnauthorized: false,
+    }
+  }
+}
+const sslConfig = process.env.NODE_ENV !== 'production' ? {} : sslData;
+
 module.exports = {
     type: "postgres",
     url: process.env.DATABASE_URL,
@@ -10,10 +19,5 @@ module.exports = {
         migrationsDir: "src/migrations",
         entitiesDir: "dist/entities/*.js"
     },
-    ssl: true,
-    extra: {
-      ssl: {
-        rejectUnauthorized: false,
-      }
-    }
+    ...sslConfig
 };
