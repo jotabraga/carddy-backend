@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express";
+
 import jwt from "jsonwebtoken";
 
-import * as sessionService from "@/services/client/session";
+import * as sessionService from "@/services/session";
 import UnauthorizedError from "@/errors/Unauthorized";
 
 interface JwtPayload {
@@ -18,10 +19,10 @@ export default async function authenticationMiddleware(req: Request, res: Respon
     } 
   
     const { userId } = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
-    
-    const userSession = await sessionService.findUserSessionByToken(token);
 
-    if(Number(userSession) !== userId) {
+    const userSession = await sessionService.findSessionByToken(token);
+
+    if(userSession.token !== token) {
       throw new UnauthorizedError();
     }
 

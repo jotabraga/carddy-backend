@@ -1,17 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import User from "./User";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity("sessions")
-export default class Session {
+export default class Session extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  token: string;
-
-  @Column()
   userId: number;
 
-  @ManyToOne(() => User, (user) => user.sessions)
-  user: User;
+  @Column()
+  token: string;
+
+  static async createNew(userId: number, token: string) {
+    const session = this.create({ userId, token });
+    await session.save();
+    return session;
+  }
 }
