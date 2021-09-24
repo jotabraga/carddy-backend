@@ -1,12 +1,28 @@
 {
   "compilerOptions": {
     "noImplicitAny": true,
-    "esModuleInterop": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "target": "es6",
+    "module": "commonjs",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "typeRoots": [
+      "./src/@types",
+      "./node_modules/@types"
+    ]
   },
-  "exclude": [
-    "node_modules",
-    "tests"
+  "include": [
+    "src"
+  ],
+  "plugins": [
+    {
+      "transform": "typescript-transform-paths"
+    }
   ]
 }
