@@ -7,6 +7,8 @@ import Session from "../entities/Session";
 
 export async function registerUser({ email, password }: UserInterface) {
 
+  console.log("aqui");
+
   const alreadyExists = await getRepository(User).findOne({ email });
   if (alreadyExists) return false;
 
