@@ -4,6 +4,8 @@ import { UserInterface } from "../interfaces/UserInterfaces";
 import * as userService from "../services/userService";
 
 export async function signUp(req: Request, res: Response) {
+    alert("aqui")
+    console.log(req.body);
     const signUpError = signUpData.validate(req.body).error;
     if (signUpError) return res.sendStatus(400);
 
